@@ -1,5 +1,6 @@
+rootProject.name = "build-logic"
+
 pluginManagement {
-    includeBuild("build-logic")
     repositories {
         google {
             content {
@@ -12,16 +13,18 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
     }
+
+    versionCatalogs {
+        create("libs") {
+            from(files("../gradle/libs.versions.toml"))
+        }
+    }
 }
 
-rootProject.name = "OTT_multimodule"
-
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
-
-include(":app")
+include(":convention")
