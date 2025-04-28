@@ -23,7 +23,7 @@ dependencies {
 
 gradlePlugin {
     plugins {
-        register("androidApplication") {
+        register("androidApplicationConventionPlugin") {
             id = libs.plugins.ott.android.application.asProvider().get().pluginId
 
             implementationClass = "AndroidApplicationConventionPlugin"
@@ -32,6 +32,31 @@ gradlePlugin {
             id = libs.plugins.ott.android.application.compose.get().pluginId
 
             implementationClass = "AndroidApplicationComposeConventionPlugin"
+        }
+        register("androidLibraryConventionPlugin") {
+            id = libs.plugins.ott.android.library.asProvider().get().pluginId
+
+            implementationClass = "AndroidLibraryConventionPlugin"
+        }
+        register("androidLibraryComposeConventionPlugin") {
+            id = libs.plugins.ott.android.library.compose.get().pluginId
+
+            implementationClass = "AndroidLibraryComposeConventionPlugin"
+        }
+        register("hilt") {
+            id = libs.plugins.ott.android.hilt.get().pluginId
+
+            implementationClass = "HiltConventionPlugin"
+        }
+        register("androidFeatureUi") {
+            id = libs.plugins.ott.feature.ui.get().pluginId
+
+            implementationClass = "AndroidFeatureUiConventionPlugin"
+        }
+        register("jvmLibrary") {
+            id = libs.plugins.ott.jvm.library.get().pluginId
+
+            implementationClass = "JvmLibraryConventionPlugin"
         }
     }
 }
