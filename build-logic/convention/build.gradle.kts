@@ -48,5 +48,15 @@ gradlePlugin {
 
             implementationClass = "HiltConventionPlugin"
         }
+        register("androidFeatureUi") {
+            id = libs.plugins.ott.feature.ui.get().pluginId
+
+            implementationClass = "AndroidFeatureUiConventionPlugin"
+        }
+        register("jvmLibrary") {
+            id = libs.plugins.ott.jvm.library.get().pluginId
+
+            implementationClass = "JvmLibraryConventionPlugin"
+        }
     }
 }
