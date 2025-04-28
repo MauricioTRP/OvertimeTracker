@@ -25,3 +25,5 @@ rootProject.name = "OTT_multimodule"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 include(":app")
+include(":auth:domain")
+include(":auth:presentation")
