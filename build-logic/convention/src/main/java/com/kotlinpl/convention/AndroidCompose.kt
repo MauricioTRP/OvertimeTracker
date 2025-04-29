@@ -18,10 +18,9 @@ internal fun Project.configureAndroidCompose(
             "implementation"(platform(bom))
             "implementation"(libs.findLibrary("androidx-ui").get())
             "implementation"(libs.findLibrary("androidx-ui-graphics").get())
-            "implementation"(libs.findLibrary("androidx-ui-tooling-preview").get())
+            "implementation"(libs.findLibrary("androidx-ui-tooling").get())
+            "debugImplementation"(libs.findLibrary("androidx-ui-tooling-preview").get())
             "androidTestImplementation"(platform(bom))
-            "debugImplementation"(libs.findLibrary("androidx-ui-tooling").get())
-
         }
     }
 }

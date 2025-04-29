@@ -1,4 +1,4 @@
-package com.kotlinpl.ott_multimodule.ui.theme
+package com.kotlinpl.core.presentation.designsystem
 
 import androidx.compose.ui.graphics.Color
 

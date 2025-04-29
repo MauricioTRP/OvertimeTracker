@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="loading">Cargando</string>
+    <string name="password">Campo de Contraseña</string>
+    <string name="show_password">Mostrar Contraseña</string>
+    <string name="hide_password">Esconder Contraseña</string>
+</resources>

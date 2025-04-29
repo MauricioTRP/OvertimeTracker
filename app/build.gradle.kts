@@ -5,23 +5,11 @@ plugins {
 android {
     namespace = "com.kotlinpl.ott_multimodule"
 
-    defaultConfig {
-        applicationId = "com.kotlinpl.ott_multimodule"
-        versionCode = 1
-        versionName = "1.0"
-
-    }
-
-    kotlinOptions {
-        jvmTarget = "11"
-    }
 }
 
 dependencies {
+    implementation(projects.core.presentation.designsystem)
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.material3)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

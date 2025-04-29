@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="small_padding">8dp</dimen>
+    <dimen name="xs_padding">4dp</dimen>
+    <dimen name="medium_padding">12dp</dimen>
+    <dimen name="rounded_border">16dp</dimen>
+    <dimen name="border_width_small">1dp</dimen>
+</resources>
