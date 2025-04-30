@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="disk_full">Failed to save the item, your disk is full.</string>
+    <string name="request_timeout">The request timed out</string>
+    <string name="no_internet">No internet connection, please check</string>
+    <string name="payload_too_large">The file you\'re trying to upload is too large</string>
+    <string name="server_error">Oops, something went wrong, please try again</string>
+    <string name="serialization">Oops, couldn\'t parse data.</string>
+    <string name="unknown_error">An unknown error occurred.</string>
+    <string name="unauthorized">You don\'t have authorization to perform this action</string>
+    <string name="conflict">There\'s problems with this request</string>
+    <string name="too_many_requests">You\'ve excedded the amount of permitted requests, try again later</string>
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="disk_full">Error al guardar el item, no tienes espacio de almacenamiento</string>
+    <string name="request_timeout">Error en la solicitud</string>
+    <string name="no_internet">No hay conexión a internet, por favor revisalo</string>
+    <string name="payload_too_large">El archivo que quieres subir es muy grande</string>
+    <string name="server_error">Ups, algo salió mal, por favor inténtalo de nuevo</string>
+    <string name="serialization">Ups, no pudimos analizar la data</string>
+    <string name="unknown_error">Un error desconocido ha ocurrido</string>
+    <string name="unauthorized">No tienes autorización para realizar esta acción</string>
+    <string name="conflict">Hay problemas con esta solicitud</string>
+    <string name="too_many_requests">Haz excedido la cantidad de solicitudes permitidas, por favor inténtalo más tarde</string>
+</resources>

@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import com.kotlinpl.core.presentation.designsystem.EyeClosed
 import com.kotlinpl.core.presentation.designsystem.EyeOpen
 import com.kotlinpl.core.presentation.designsystem.LockIcon
+import com.kotlinpl.core.presentation.designsystem.OTT_MultimoduleTheme
 import com.kotlinpl.core.presentation.designsystem.R
 
 @Composable
@@ -122,12 +123,14 @@ fun OttPasswordTextField(
 fun OttPasswordTextFieldPreview() {
     var isPasswordVisible by remember { mutableStateOf(false) }
 
-    OttPasswordTextField(
-        isPasswordVisible = isPasswordVisible,
-        state = rememberTextFieldState(),
-        onTogglePasswordVisibility = { isPasswordVisible = !isPasswordVisible },
-        hint = "Set password",
-        title = null,
-        fieldDescription = "Password"
-    )
+    OTT_MultimoduleTheme {
+        OttPasswordTextField(
+            isPasswordVisible = isPasswordVisible,
+            state = rememberTextFieldState(),
+            onTogglePasswordVisibility = { isPasswordVisible = !isPasswordVisible },
+            hint = "Set password",
+            title = null,
+            fieldDescription = "Password"
+        )
+    }
 }
