@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ott">Overtime Tracker</string>
+    <string name="welcome_to_overtime_tracker">Welcome to Overtime Tracker App</string>
+    <string name="overtime_tracker_description">An app to keep track of any overtime you do over periods you can define</string>
+    <string name="sign_up">Sign up</string>
+    <string name="sign_up_description">Navigate to sign up form</string>
+    <string name="sign_in">Sign in</string>
+    <string name="sign_in_description">Press to sign in</string>
+    <string name="create_account">Create Account</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="login">Login</string>
+    <string name="example_email">example@email.com</string>
+    <string name="email">Email</string>
+    <string name="must_be_valid_email">Must be a valid email</string>
+    <string name="must_be_valid_password">Must be a valid password</string>
+    <string name="passwordDescription">Must be a password with uppercase, lowercase, number and a symbol</string>
+    <string name="at_least_x_characters">At least %d characters</string>
+    <string name="at_least_one_number">At least one number</string>
+    <string name="at_least_one_uppercase">At least one uppercase</string>
+    <string name="at_least_one_lowecase">At least one lowercase</string>
+    <string name="register">Register</string>
+</resources>

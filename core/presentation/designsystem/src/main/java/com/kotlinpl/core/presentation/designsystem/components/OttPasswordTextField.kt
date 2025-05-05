@@ -1,11 +1,14 @@
 package com.kotlinpl.core.presentation.designsystem.components
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -15,6 +18,8 @@ import androidx.compose.foundation.text.input.TextObfuscationMode
 import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -25,6 +30,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
@@ -56,26 +63,58 @@ fun OttPasswordTextField(
                 contentDescription = fieldDescription
             }
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
+        var isFocused by remember {
+            mutableStateOf(false)
+        }
+        Column(
+            modifier = modifier
         ) {
-            if (title != null) {
-                Text(
-                    text = title,
-                )
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+            ) {
+                if (title != null) {
+                    Text(
+                        text = title,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
             }
-            Spacer(modifier = Modifier.padding(dimensionResource(R.dimen.xs_padding)))
+            Spacer(modifier = Modifier.height(4.dp))
             BasicSecureTextField(
                 state = state,
                 textObfuscationMode = if (isPasswordVisible) {
                     TextObfuscationMode.Visible
                 } else TextObfuscationMode.Hidden,
+                textStyle = LocalTextStyle.current.copy(
+                    color = MaterialTheme.colorScheme.onBackground
+                ),
+                cursorBrush = SolidColor(MaterialTheme.colorScheme.onBackground),
                 modifier = Modifier
-                    .clip(RoundedCornerShape(dimensionResource(R.dimen.rounded_border)))
-                    .padding(dimensionResource(R.dimen.medium_padding))
-                    .onFocusChanged { isFocused = it.isFocused },
+                    .clip(RoundedCornerShape(16.dp))
+                    .background(
+                        if (isFocused) {
+                            MaterialTheme.colorScheme.primary.copy(
+                                alpha = 0.05f
+                            )
+                        } else {
+                            MaterialTheme.colorScheme.surface
+                        }
+                    )
+                    .border(
+                        width = 1.dp,
+                        color = if (isFocused) {
+                            MaterialTheme.colorScheme.primary
+                        } else {
+                            Color.Transparent
+                        },
+                        shape = RoundedCornerShape(16.dp)
+                    )
+                    .padding(horizontal = 12.dp)
+                    .onFocusChanged {
+                        isFocused = it.isFocused
+                    },
                 decorator = { innerBox ->
                     Row(
                         modifier = Modifier
@@ -85,6 +124,7 @@ fun OttPasswordTextField(
                         Icon(
                             imageVector = LockIcon,
                             contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                         Spacer(modifier = Modifier.width(16.dp))
                         Box(
@@ -94,6 +134,9 @@ fun OttPasswordTextField(
                             if (state.text.isEmpty() && !isFocused) {
                                 Text(
                                     text = hint,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(
+                                        alpha = 0.4f
+                                    ),
                                     modifier = Modifier.fillMaxWidth()
                                 )
                             }
@@ -104,11 +147,12 @@ fun OttPasswordTextField(
                                 imageVector = if (!isPasswordVisible) {
                                     EyeClosed
                                 } else EyeOpen,
-                                contentDescription = if(isPasswordVisible) {
+                                contentDescription = if (isPasswordVisible) {
                                     stringResource(id = R.string.show_password)
                                 } else {
                                     stringResource(id = R.string.hide_password)
-                                }
+                                },
+                                tint = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                         }
                     }

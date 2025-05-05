@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.ott.feature.ui)
+    alias(libs.plugins.ott.android.hilt)
 }
 
 android {

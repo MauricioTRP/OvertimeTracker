@@ -17,3 +17,7 @@ val EyeClosed : ImageVector
 val EyeOpen : ImageVector
     @Composable
     get() = ImageVector.vectorResource(R.drawable.eye_opened)
+
+val AppIcon: ImageVector
+    @Composable
+    get() = ImageVector.vectorResource(R.drawable.common_large_palette)

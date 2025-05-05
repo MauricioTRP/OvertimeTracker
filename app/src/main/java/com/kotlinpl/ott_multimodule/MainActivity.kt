@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
 import com.kotlinpl.core.presentation.designsystem.OTT_MultimoduleTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,10 +20,12 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             OTT_MultimoduleTheme {
+                val navController = rememberNavController()
+
+
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
+                    NavigationRoot(
+                        navController = navController
                     )
                 }
             }

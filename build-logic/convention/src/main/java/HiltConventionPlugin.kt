@@ -23,6 +23,7 @@ class HiltConventionPlugin : Plugin<Project> {
                 apply(plugin = "dagger.hilt.android.plugin")
                 dependencies {
                     "implementation"(libs.findLibrary("hilt.android").get())
+                    "implementation"(libs.findLibrary("hilt.navigation.compose").get()) // TODO move to a AndroidX convention plugin?
                 }
             }
         }

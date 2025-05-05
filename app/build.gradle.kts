@@ -9,6 +9,11 @@ android {
 
 dependencies {
     implementation(projects.core.presentation.designsystem)
+    implementation(projects.auth.domain)
+    implementation(projects.auth.presentation)
+    implementation(projects.auth.data)
+
+    implementation(libs.androidx.navigation.compose)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
