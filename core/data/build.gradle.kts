@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.ott.android.library)
     alias(libs.plugins.ott.android.hilt)
+    alias(libs.plugins.ott.jvm.ktor)
 }
 
 android {
@@ -13,4 +14,6 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    implementation(projects.core.database)
 }
