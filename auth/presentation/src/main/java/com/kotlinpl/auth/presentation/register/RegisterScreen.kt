@@ -54,8 +54,8 @@ fun RegisterScreenRoot(
 
 //    ObserveAsEvents(viewModel.events) { }
     RegisterScreen(
-        state = TODO(),
-        onAction = { onSignInClick() },
+        state = viewModel.state,
+        onAction = { viewModel.onAction(RegisterAction.OnRegisterClick) },
         onSuccessfulRegistration = onSuccessfulRegistration
     )
 }

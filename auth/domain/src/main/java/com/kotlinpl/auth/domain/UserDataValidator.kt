@@ -1,6 +1,8 @@
 package com.kotlinpl.auth.domain
 
-class UserDataValidator(
+import javax.inject.Inject
+
+class UserDataValidator @Inject constructor(
     private val patternValidator: PatternValidator
 ) {
     fun isValidEmail(email: String) : Boolean {
