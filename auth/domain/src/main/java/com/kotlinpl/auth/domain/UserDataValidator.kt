@@ -1,4 +1,4 @@
-package com.kotlinpl.domain
+package com.kotlinpl.auth.domain
 
 class UserDataValidator(
     private val patternValidator: PatternValidator

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "468079182242",
+    "project_id": "crud-productos-72ba4",
+    "storage_bucket": "crud-productos-72ba4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:468079182242:android:58263447c6e8a01da4b2fb",
+        "android_client_info": {
+          "package_name": "com.kotlinpl.overtimetracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "468079182242-ptq2nhl0b7c19an1sla88n0mg776bk75.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kotlinpl.overtimetracker",
+            "certificate_hash": "c3c124a86d943a527e65ed97996394f7edecbc72"
+          }
+        },
+        {
+          "client_id": "468079182242-qq0ir4oetp38pqd1ngjmbu0r91929ko4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXexPYhyISRaBmLpTK35u2RHqtdpHcfD4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "468079182242-qq0ir4oetp38pqd1ngjmbu0r91929ko4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

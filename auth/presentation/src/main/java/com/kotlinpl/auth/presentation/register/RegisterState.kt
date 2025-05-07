@@ -1,7 +1,7 @@
 package com.kotlinpl.auth.presentation.register
 
 import androidx.compose.foundation.text.input.TextFieldState
-import com.kotlinpl.domain.PasswordValidationState
+import com.kotlinpl.auth.domain.PasswordValidationState
 
 data class RegisterState(
     val email: TextFieldState = TextFieldState(),

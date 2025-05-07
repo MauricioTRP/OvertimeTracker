@@ -1,4 +1,4 @@
-package com.kotlinpl.domain
+package com.kotlinpl.auth.domain
 
 data class PasswordValidationState(
     val hasMinLength: Boolean = false,

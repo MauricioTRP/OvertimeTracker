@@ -1,5 +1,6 @@
 package com.kotlinpl.ott_multimodule
 
+import android.app.Application
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -13,7 +14,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.kotlinpl.core.presentation.designsystem.OTT_MultimoduleTheme
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.HiltAndroidApp
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,4 +51,8 @@ fun GreetingPreview() {
     OTT_MultimoduleTheme {
         Greeting("Android")
     }
+}
+
+@HiltAndroidApp
+class MainApplication : Application() {
 }

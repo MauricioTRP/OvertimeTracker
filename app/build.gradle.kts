@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.ott.android.application.compose)
+    alias(libs.plugins.ott.android.hilt)
 }
 
 android {
@@ -8,10 +9,17 @@ android {
 }
 
 dependencies {
-    implementation(projects.core.presentation.designsystem)
     implementation(projects.auth.domain)
     implementation(projects.auth.presentation)
     implementation(projects.auth.data)
+
+    // Core Modules
+    implementation(projects.core.presentation.designsystem)
+    implementation(projects.core.presentation.ui)
+    implementation(projects.core.data)
+    implementation(projects.core.domain)
+    implementation(projects.core.database)
+
 
     implementation(libs.androidx.navigation.compose)
 

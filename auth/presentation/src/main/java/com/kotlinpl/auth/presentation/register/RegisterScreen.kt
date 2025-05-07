@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
@@ -24,7 +23,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.Green
 import androidx.compose.ui.graphics.Color.Companion.Red
-import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
@@ -42,9 +40,8 @@ import com.kotlinpl.auth.presentation.R
 import com.kotlinpl.core.presentation.designsystem.components.OttActionButton
 import com.kotlinpl.core.presentation.designsystem.components.OttPasswordTextField
 import com.kotlinpl.core.presentation.designsystem.components.OttTextField
-import com.kotlinpl.core.presentation.ui.ObserveAsEvents
-import com.kotlinpl.domain.PasswordValidationState
-import com.kotlinpl.domain.UserDataValidator
+import com.kotlinpl.auth.domain.PasswordValidationState
+import com.kotlinpl.auth.domain.UserDataValidator
 
 @Composable
 fun RegisterScreenRoot(
