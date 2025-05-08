@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
+import com.google.firebase.FirebaseApp
 import com.kotlinpl.core.presentation.designsystem.OTT_MultimoduleTheme
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.HiltAndroidApp
@@ -37,22 +38,12 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    OTT_MultimoduleTheme {
-        Greeting("Android")
-    }
-}
 
 @HiltAndroidApp
 class MainApplication : Application() {
+    override fun onCreate() {
+        super.onCreate()
+
+        FirebaseApp.initializeApp(this)
+    }
 }

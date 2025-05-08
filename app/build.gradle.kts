@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.ott.android.application.compose)
     alias(libs.plugins.ott.android.hilt)
+    alias(libs.plugins.google.services)
 }
 
 android {
@@ -20,6 +21,9 @@ dependencies {
     implementation(projects.core.domain)
     implementation(projects.core.database)
 
+    // Firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth)
 
     implementation(libs.androidx.navigation.compose)
 

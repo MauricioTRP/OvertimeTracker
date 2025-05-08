@@ -7,6 +7,35 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:468079182242:android:9ee81ec78243bf76a4b2fb",
+        "android_client_info": {
+          "package_name": "com.kotlinpl.ott_multimodule"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "468079182242-qq0ir4oetp38pqd1ngjmbu0r91929ko4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXexPYhyISRaBmLpTK35u2RHqtdpHcfD4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "468079182242-qq0ir4oetp38pqd1ngjmbu0r91929ko4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:468079182242:android:58263447c6e8a01da4b2fb",
         "android_client_info": {
           "package_name": "com.kotlinpl.overtimetracker"

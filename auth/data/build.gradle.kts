@@ -11,4 +11,8 @@ dependencies {
     implementation(projects.core.domain)
     implementation(projects.core.data)
     implementation(projects.auth.domain)
+
+    // Firebase and FirebaseAuth
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth)
 }
