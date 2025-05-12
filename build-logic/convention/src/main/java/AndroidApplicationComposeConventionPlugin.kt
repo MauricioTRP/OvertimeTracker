@@ -19,6 +19,11 @@ class AndroidApplicationComposeConventionPlugin : Plugin<Project> {
 
             dependencies {
                 "implementation"(libs.findLibrary("androidx-activity-compose").get())
+                "testImplementation"(libs.findLibrary("junit").get())
+                "androidTestImplementation"(libs.findLibrary("androidx-junit").get())
+                "androidTestImplementation"(libs.findLibrary("androidx-espresso-core").get())
+                "androidTestImplementation"(libs.findLibrary("androidx-ui-test-junit4").get())
+                "debugImplementation"(libs.findLibrary("androidx-ui-test-manifest").get())
             }
         }
     }

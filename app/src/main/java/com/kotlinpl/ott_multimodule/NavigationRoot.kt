@@ -1,24 +1,30 @@
 package com.kotlinpl.ott_multimodule
 
+import android.util.Log
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.kotlinpl.auth.presentation.intro.IntroScreenRoot
+import com.kotlinpl.auth.presentation.login.LoginScreenRoot
 import com.kotlinpl.auth.presentation.register.RegisterScreenRoot
-import com.kotlinpl.ott_multimodule.AuthScreens
+import com.kotlinpl.booking.presentation.BookingScreenRoot
 
 @Composable
 fun NavigationRoot(
-    navController: NavHostController
+    navController: NavHostController,
+    isLoggedIn: Boolean,
+    modifier: Modifier = Modifier
 ) {
     NavHost(
         navController = navController,
-        startDestination = AuthScreens.Root.route
+        startDestination = if(isLoggedIn) AuthScreens.Root.route else BookingScreens.Root.route,
     ) {
+        Log.d("NavigationRoot", "isLoggedIn: $isLoggedIn")
+        bookingGraph(navController)
         authGraph(navController)
     }
 }
@@ -28,6 +34,7 @@ private fun NavGraphBuilder.authGraph(navController: NavHostController) {
         startDestination = AuthScreens.Intro.route,
         route = AuthScreens.Root.route
     ) {
+        Log.d("NavigationRoot", "authGraph")
         composable(route = AuthScreens.Intro.route) {
             IntroScreenRoot(
                 onSignInClick = {
@@ -56,7 +63,43 @@ private fun NavGraphBuilder.authGraph(navController: NavHostController) {
                         restoreState = true
                     }
                 },
-                onSuccessfulRegistration = {},
+                onSuccessfulRegistration = {
+                    navController.navigate(BookingScreens.Root.route)
+                },
+            )
+        }
+
+        composable(route = AuthScreens.Login.route) {
+            LoginScreenRoot(
+                onSuccessfulLogin = {
+                    navController.navigate(BookingScreens.Root.route)
+                },
+                onSignUpClick = {
+                    navController.navigate(AuthScreens.Register.route) {
+                        popUpTo(route = AuthScreens.Login.route) {
+                            inclusive = true
+                            saveState = true
+                        }
+
+                        restoreState = true
+                    }
+                }
+            )
+        }
+    }
+}
+
+private fun NavGraphBuilder.bookingGraph(navController: NavHostController) {
+    navigation(
+        startDestination = BookingScreens.Home.route,
+        route = BookingScreens.Root.route
+    ) {
+        composable(BookingScreens.Home.route) {
+            BookingScreenRoot(
+                onActivitySearchClick = { /*TODO()*/ },
+                onProfileClick = { /*TODO()*/ },
+                onSaveClick = { /*TODO()*/ },
+                modifier = Modifier
             )
         }
     }

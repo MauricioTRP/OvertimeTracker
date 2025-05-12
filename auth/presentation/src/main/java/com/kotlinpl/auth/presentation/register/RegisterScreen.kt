@@ -1,5 +1,6 @@
 package com.kotlinpl.auth.presentation.register
 
+import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -42,6 +43,7 @@ import com.kotlinpl.core.presentation.designsystem.components.OttPasswordTextFie
 import com.kotlinpl.core.presentation.designsystem.components.OttTextField
 import com.kotlinpl.auth.domain.PasswordValidationState
 import com.kotlinpl.auth.domain.UserDataValidator
+import com.kotlinpl.core.presentation.ui.ObserveAsEvents
 
 @Composable
 fun RegisterScreenRoot(
@@ -52,7 +54,28 @@ fun RegisterScreenRoot(
     val context = LocalContext.current
     val keyboardController = LocalSoftwareKeyboardController.current
 
-//    ObserveAsEvents(viewModel.events) { }
+    ObserveAsEvents(viewModel.events) { event ->
+        when(event) {
+            is RegisterEvent.Error -> {
+                keyboardController?.hide()
+                Toast.makeText(
+                    context,
+                    event.error.asString(context),
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+            RegisterEvent.RegistrationSuccess -> {
+                keyboardController?.hide()
+                Toast.makeText(
+                    context,
+                    R.string.registration_successful_you_can_login,
+                    Toast.LENGTH_LONG
+                ).show()
+                onSuccessfulRegistration()
+            }
+        }
+    }
+
     RegisterScreen(
         state = viewModel.state,
         onAction = { viewModel.onAction(RegisterAction.OnRegisterClick) },

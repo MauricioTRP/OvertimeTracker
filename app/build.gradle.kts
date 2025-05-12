@@ -10,9 +10,20 @@ android {
 }
 
 dependencies {
+    // Auth Module
     implementation(projects.auth.domain)
     implementation(projects.auth.presentation)
     implementation(projects.auth.data)
+
+    // Work Hours Modules
+    implementation(projects.workhours.domain)
+    implementation(projects.workhours.data)
+    implementation(projects.workhours.presentation)
+
+    // Booking Modules
+    implementation(projects.booking.domain)
+    implementation(projects.booking.data)
+    implementation(projects.booking.presentation)
 
     // Core Modules
     implementation(projects.core.presentation.designsystem)
@@ -25,11 +36,7 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth)
 
+    // App dependencies
     implementation(libs.androidx.navigation.compose)
-
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.test.manifest)
+    implementation(libs.androidx.core.splashscreen)
 }

@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.ott.android.library)
     alias(libs.plugins.ott.android.hilt)
-    alias(libs.plugins.ott.jvm.ktor)
 }
 
 android {

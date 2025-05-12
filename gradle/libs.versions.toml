@@ -2,6 +2,7 @@
 agp = "8.9.2"
 kotlin = "2.1.10"
 coreKtx = "1.16.0"
+coreSplashscreen = "1.0.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
@@ -10,11 +11,15 @@ activityCompose = "1.10.1"
 composeBom = "2025.04.01"
 jetbrainsKotlinJvm = "2.1.10"
 coroutines = "1.10.2"
-ktor = "3.1.2"
-ktorClientLoggin = "3.0.1"
 navigationCompose = "2.8.9"
 firebaseBom = "33.13.0"
 googleServices = "4.4.2"
+kotlinxSerialization = "1.8.1"
+okHttp3 = "4.11.0"
+retrofitSerializationConverter = "1.0.0"
+retrofit = "2.11.0"
+mongoBOM = "5.5.0"
+bson = "5.5.0"
 
 # build-logic gradle plugins
 androidGradlePlugin = "8.9.2"
@@ -35,6 +40,7 @@ material = "1.12.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -52,13 +58,18 @@ androidx-navigation-compose = { group = "androidx.navigation", name = "navigatio
 androidx-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycleRuntimeKtx" }
 androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleRuntimeKtx" }
 kotlinx-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
-ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
-ktor-client-cio = { group = "io.ktor", name = "ktor-client-cio", version.ref = "ktor" }
-ktor-client-auth = { module = "io.ktor:ktor-client-auth", version.ref = "ktor" }
-ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
-ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktorClientLoggin" }
-ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.ref = "kotlin" }
+
+# Network Calls
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+kotlinx-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
+retrofit-serialization-converter = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "retrofitSerializationConverter" }
+okHttp3 = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okHttp3" }
+
+# Database Drivers
+mongodb-driver-bom = { group = "org.mongodb", name = "mongodb-driver-bom", version.ref = "mongoBOM" }
+mongodb-driver-coroutine = { group = "org.mongodb", name = "mongodb-driver-kotlin-coroutine" }
+bson-kotlinx = { group = "org.mongodb", name = "bson-kotlinx", version.ref = "bson" }
 
 # build-logic dependencies
 # Android Application
@@ -119,12 +130,4 @@ compose = [
 compose-debug = [
     "androidx-ui-tooling",
     "androidx-ui-test-manifest",
-]
-ktor = [
-    "ktor-client-auth",
-    "ktor-client-cio",
-    "ktor-client-content-negotiation",
-    "ktor-client-core",
-    "ktor-client-logging",
-    "ktor-serialization-kotlinx-json"
 ]
