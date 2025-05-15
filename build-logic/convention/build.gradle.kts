@@ -58,10 +58,10 @@ gradlePlugin {
 
             implementationClass = "JvmLibraryConventionPlugin"
         }
-        register("jvmKtor") {
-            id = libs.plugins.ott.jvm.ktor.get().pluginId
+        register("jvmRetrofit") {
+            id = libs.plugins.ott.jvm.retrofit.get().pluginId
 
-            implementationClass = "JvmKtorConventionPlugin"
+            implementationClass = "JvmRetrofitConventionPlugin"
         }
     }
 }

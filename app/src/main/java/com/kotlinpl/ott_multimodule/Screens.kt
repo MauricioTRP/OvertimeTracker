@@ -45,7 +45,7 @@ sealed interface BookingScreens {
         override val route = "profile"
     }
 
-    data object SearchActivity : BookingScreens, Screens {
-        override val route = "search_activity"
+    data object Activities : BookingScreens, Screens {
+        override val route = "activities"
     }
 }

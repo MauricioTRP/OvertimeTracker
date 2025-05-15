@@ -10,4 +10,5 @@
     <string name="unauthorized">You don\'t have authorization to perform this action</string>
     <string name="conflict">There\'s problems with this request</string>
     <string name="too_many_requests">You\'ve excedded the amount of permitted requests, try again later</string>
+    <string name="not_found">Resource not found</string>
 </resources>

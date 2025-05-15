@@ -26,15 +26,12 @@ class MainViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            Log.d("MainViewModel", "isLoggedIn: ${state.isLoggedIn}")
             state = state.copy(isCheckingAuth = true)
             state = state.copy(
                 isLoggedIn = !authService.currentUserId.isEmpty(),
                 isCheckingAuth = false
             )
             state = state.copy(isCheckingAuth = false)
-
-            Log.d("MainViewModel", "isLoggedIn: ${state.isLoggedIn}")
         }
     }
 }

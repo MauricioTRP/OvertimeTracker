@@ -1,8 +1,12 @@
 package com.kotlinpl.booking.domain.activity
 
+import com.kotlinpl.core.domain.booking.Activity
+import com.kotlinpl.core.domain.util.DataError
+import com.kotlinpl.core.domain.util.Result
+
 interface ActivityRepository {
-    suspend fun bookActivity(activity: Activity)
-    suspend fun getActivities(): List<Activity>
-    suspend fun getActivityById(id: String): Activity?
-    suspend fun getActivitiesByUserId(userId: String): List<Activity>
+    suspend fun bookActivity(activity: Activity) : Result<Unit, DataError>
+    suspend fun getActivities(latitude: Double, longitude: Double, radius: Int): Result<List<Activity>, DataError>
+    suspend fun getActivityById(id: String): Result<Activity?, DataError>
+    suspend fun getActivitiesByUserId(userId: String): Result<List<Activity>, DataError>
 }

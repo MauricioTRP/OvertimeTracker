@@ -8,6 +8,7 @@ dependencies {
 
     implementation(projects.core.domain)
 
+    // Dagger
     implementation(libs.hilt.core)
     ksp(libs.hilt.compiler)
 }

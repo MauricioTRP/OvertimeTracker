@@ -58,6 +58,8 @@ fun LoginScreenRoot(
                     R.string.login_successful,
                     Toast.LENGTH_LONG
                 ).show()
+
+                onSuccessfulLogin()
             }
 
         }

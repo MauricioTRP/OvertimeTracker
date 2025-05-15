@@ -12,6 +12,7 @@ import com.kotlinpl.auth.presentation.intro.IntroScreenRoot
 import com.kotlinpl.auth.presentation.login.LoginScreenRoot
 import com.kotlinpl.auth.presentation.register.RegisterScreenRoot
 import com.kotlinpl.booking.presentation.BookingScreenRoot
+import com.kotlinpl.booking.presentation.activities.ActivitiesScreenRoot
 
 @Composable
 fun NavigationRoot(
@@ -21,9 +22,8 @@ fun NavigationRoot(
 ) {
     NavHost(
         navController = navController,
-        startDestination = if(isLoggedIn) AuthScreens.Root.route else BookingScreens.Root.route,
+        startDestination = if(!isLoggedIn) AuthScreens.Root.route else BookingScreens.Root.route,
     ) {
-        Log.d("NavigationRoot", "isLoggedIn: $isLoggedIn")
         bookingGraph(navController)
         authGraph(navController)
     }
@@ -34,7 +34,6 @@ private fun NavGraphBuilder.authGraph(navController: NavHostController) {
         startDestination = AuthScreens.Intro.route,
         route = AuthScreens.Root.route
     ) {
-        Log.d("NavigationRoot", "authGraph")
         composable(route = AuthScreens.Intro.route) {
             IntroScreenRoot(
                 onSignInClick = {
@@ -91,7 +90,7 @@ private fun NavGraphBuilder.authGraph(navController: NavHostController) {
 
 private fun NavGraphBuilder.bookingGraph(navController: NavHostController) {
     navigation(
-        startDestination = BookingScreens.Home.route,
+        startDestination = BookingScreens.Activities.route,
         route = BookingScreens.Root.route
     ) {
         composable(BookingScreens.Home.route) {
@@ -101,6 +100,10 @@ private fun NavGraphBuilder.bookingGraph(navController: NavHostController) {
                 onSaveClick = { /*TODO()*/ },
                 modifier = Modifier
             )
+        }
+
+        composable(BookingScreens.Activities.route) {
+            ActivitiesScreenRoot()
         }
     }
 }

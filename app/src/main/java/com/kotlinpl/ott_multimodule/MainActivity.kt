@@ -24,6 +24,11 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        /**
+         * On Start setup a "clear instance" of [AuthTokenDto] on [DataPreferences]
+         * to be used by OkHttp custom client
+         */
+
         installSplashScreen().apply {
             setKeepOnScreenCondition {
                 viewModel.state.isCheckingAuth
