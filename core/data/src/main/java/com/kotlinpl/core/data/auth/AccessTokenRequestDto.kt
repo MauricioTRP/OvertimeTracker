@@ -8,7 +8,7 @@ data class AccessTokenRequestDto (
     @SerialName("client_id")
     val clientId: String,
     @SerialName("client_secret")
-    val clientKey: String,
+    val clientSecret: String,
     @SerialName("grant_type")
     val grantType: String = "client_credentials"
 )

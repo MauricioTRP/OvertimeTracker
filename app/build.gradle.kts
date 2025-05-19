@@ -6,22 +6,9 @@ plugins {
     alias(libs.plugins.ott.android.hilt)
     alias(libs.plugins.google.services)
 }
-
-android {
-    namespace = "com.kotlinpl.ott_multimodule"
-
-    defaultConfig {
-        buildConfigField("String", "CLIENT_ID", "\"$clientId\"")
-        buildConfigField("String", "CLIENT_ID", "\"$clientSecret\"")
-    }
-
-    buildFeatures {
-        buildConfig = true
-    }
-}
-
 /**
  * Properties
+ * Must be before android block
  */
 val localProperties = Properties().apply {
     val localFile = rootProject.file("local.properties")
@@ -30,8 +17,22 @@ val localProperties = Properties().apply {
     }
 }
 
-val clientId = localProperties.getProperty("CLIENT_ID")
-val clientSecret = localProperties.getProperty("CLIENT_SECRET")
+val clientId = localProperties.getProperty("OTT_CLIENT_ID")
+val clientSecret = localProperties.getProperty("OTT_CLIENT_SECRET")
+
+android {
+    namespace = "com.kotlinpl.ott_multimodule"
+
+    defaultConfig {
+        buildConfigField("String", "OTT_CLIENT_ID", "\"$clientId\"")
+        buildConfigField("String", "OTT_CLIENT_SECRET", "\"$clientSecret\"")
+    }
+
+    buildFeatures {
+        buildConfig = true
+    }
+}
+
 
 dependencies {
     // Auth Module

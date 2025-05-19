@@ -1,16 +1,16 @@
-package com.kotlinpl.core.domain
+package com.kotlinpl.core.domain.session
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class AuthInfo(
+data class AuthSessionInfo(
     @SerialName("access_token")
     val accessToken: String,
     @SerialName("refresh_token")
     val refreshToken: String,
     @SerialName("client_id")
-    val userId: String,
+    val clientId: String,
     @SerialName("expires_in")
     val expiresIn: Long,
     @SerialName("token_type")

@@ -25,9 +25,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         /**
-         * On Start setup a "clear instance" of [AuthTokenDto] on [DataPreferences]
-         * to be used by OkHttp custom client
+         * On Start initial AuthSession info
          */
+
 
         installSplashScreen().apply {
             setKeepOnScreenCondition {
