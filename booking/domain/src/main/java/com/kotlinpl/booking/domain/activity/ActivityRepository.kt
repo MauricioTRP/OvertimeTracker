@@ -5,8 +5,8 @@ import com.kotlinpl.core.domain.util.DataError
 import com.kotlinpl.core.domain.util.Result
 
 interface ActivityRepository {
-    suspend fun bookActivity(activity: Activity) : Result<Unit, DataError>
+//    suspend fun bookActivity(activity: Activity) : Result<Unit, DataError>
     suspend fun getActivities(latitude: Double, longitude: Double, radius: Int): Result<List<Activity>, DataError>
-    suspend fun getActivityById(id: String): Result<Activity?, DataError>
-    suspend fun getActivitiesByUserId(userId: String): Result<List<Activity>, DataError>
+//    suspend fun getActivityById(id: String): Result<Activity?, DataError>
+//    suspend fun getActivitiesByUserId(userId: String): Result<List<Activity>, DataError>
 }

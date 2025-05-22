@@ -32,8 +32,6 @@ class EncryptedSessionStorage @Inject constructor (
         val CLIENT_SECRET_KEY = stringPreferencesKey(OTT_CLIENT_SECRET)
         // Amadeus expires in "EPOCH" adaptation
         val EXPIRES_IN_KEY = stringPreferencesKey(OTT_EXPIRES_IN)
-        // Amadeus Authorization Type
-        val TOKEN_TYPE_KEY = stringPreferencesKey(OTT_TOKEN_TYPE)
         // Amadeus Access Token
         val ACCESS_TOKEN_KEY = stringPreferencesKey(OTT_ACCESS_TOKEN)
     }
@@ -62,11 +60,10 @@ class EncryptedSessionStorage @Inject constructor (
 
     override suspend fun setInitialData(authSessionInfo: AuthSessionInfo) {
         dataStore.edit { preferences ->
-            preferences[AuthDataStoreKeys.CLIENT_ID_KEY] = authSessionInfo.clientId
-            preferences[AuthDataStoreKeys.CLIENT_SECRET_KEY] = authSessionInfo.clientSecret
+            preferences[AuthDataStoreKeys.CLIENT_ID_KEY] = authSessionInfo.clientId.toString()
             preferences[AuthDataStoreKeys.EXPIRES_IN_KEY] = authSessionInfo.expiresIn.toString()
-            preferences[AuthDataStoreKeys.TOKEN_TYPE_KEY] = authSessionInfo.tokenType
-            preferences[AuthDataStoreKeys.ACCESS_TOKEN_KEY] = authSessionInfo.accessToken
+            preferences[AuthDataStoreKeys.ACCESS_TOKEN_KEY] = authSessionInfo.accessToken.toString()
+            preferences[AuthDataStoreKeys.CLIENT_SECRET_KEY] = authSessionInfo.clientSecret.toString()
         }
     }
 
@@ -83,10 +80,9 @@ class EncryptedSessionStorage @Inject constructor (
 
     private fun mapSessionStorageToAuthInfo(preferences: Preferences): AuthSessionInfo {
         val clientId = preferences[AuthDataStoreKeys.CLIENT_ID_KEY] ?: ""
-        val clientSecret = preferences[AuthDataStoreKeys.CLIENT_SECRET_KEY] ?: ""
         val expiresIn = preferences[AuthDataStoreKeys.EXPIRES_IN_KEY] ?: ""
-        val tokenType = preferences[AuthDataStoreKeys.TOKEN_TYPE_KEY] ?: ""
         val accessToken = preferences[AuthDataStoreKeys.ACCESS_TOKEN_KEY] ?: ""
+        val clientSecret = preferences[AuthDataStoreKeys.CLIENT_SECRET_KEY] ?: ""
 
         /**
          * Amadeus doesn't send refresh token
@@ -94,10 +90,8 @@ class EncryptedSessionStorage @Inject constructor (
          */
         return AuthSessionInfo(
             accessToken = accessToken,
-            refreshToken = "",
             clientId = clientId,
             expiresIn = expiresIn.toLongOrDefault(-1),
-            tokenType = tokenType,
             clientSecret = clientSecret
         )
     }

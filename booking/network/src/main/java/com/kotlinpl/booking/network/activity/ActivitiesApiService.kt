@@ -10,7 +10,6 @@ import retrofit2.http.Query
 interface ActivitiesApiService {
     @GET("shopping/activities")
     suspend fun getActivities(
-        @Header("Authorization") token: String,
         @Query("latitude") latitude: Double,
         @Query("longitude") longitude: Double,
         @Query("radius") radius: Int

@@ -2,12 +2,17 @@ package com.kotlinpl.booking.presentation.activities
 
 import android.widget.Spinner
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -16,6 +21,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.kotlinpl.core.domain.booking.Activity
+import com.kotlinpl.core.domain.booking.GeoCode
+import com.kotlinpl.core.domain.booking.Price
 import com.kotlinpl.core.presentation.designsystem.OTT_MultimoduleTheme
 import com.kotlinpl.core.presentation.designsystem.components.GradientBackground
 import com.kotlinpl.core.presentation.designsystem.components.OttActionButton
@@ -43,7 +50,6 @@ fun ActivitiesScreen(
     GradientBackground {
         Column(
             modifier = Modifier
-                .verticalScroll(rememberScrollState())
                 .fillMaxSize()
                 .padding(horizontal = 16.dp)
                 .padding(vertical = 32.dp)
@@ -71,7 +77,9 @@ fun ActivitiesScreen(
                     enabled = true,
                     onClick = { onClick(ActivitiesScreenActions.OnGetActivitiesClick) }
                 )
-//                ActivitiesList(activities = state.activities)
+                if(!state.activities.isEmpty()) {
+                    ActivitiesList(activities = state.activities)
+                }
             }
         }
     }
@@ -88,19 +96,52 @@ fun ActivitiesList(activities: List<Activity>) {
 
 @Composable
 fun ActivityItem(activity: Activity) {
-    Column {
-        Text(text = activity.name)
-        Text(text = activity.description)
-        Text(text = activity.price.toString())
+    Card(modifier = Modifier.padding(8.dp)) {
+        Row(
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            val picture = if (activity.pictures.isEmpty()) "No picture" else activity.pictures[0]
+            Text(
+                modifier = Modifier
+                    .padding(8.dp)
+                    .size(100.dp),
+                text = picture
+            )
+
+            Spacer(modifier = Modifier.padding(horizontal = 8.dp))
+
+            Column {
+                Text(text = activity.name.trim())
+                Text(text = "${activity.price?.amount.toString().trim() ?: " "} ${activity.price?.currencyCode?.trim() ?: "No Price Data"}")
+            }
+        }
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun ActivitiesScreenPreview() {
+fun ActivityItemPreview() {
     OTT_MultimoduleTheme {
-        ActivitiesScreen(
-            state = ActivitiesUiState()
-        )
+        ActivityItem(activity = Activity(
+            type = "vacations",
+            id = "1",
+            name = "Activity 1",
+            description = "Description 1",
+            geoCode = GeoCode(latitude = 41.397158, longitude = 2.160873),
+            price = Price(amount = 100.0, currencyCode = "USD"),
+            pictures = emptyList(),
+            bookingLink = "BookingLink",
+            minimumDuration = "3 years"
+        ))
     }
 }
+
+//@Preview
+//@Composable
+//fun ActivitiesScreenPreview() {
+//    OTT_MultimoduleTheme {
+//        ActivitiesScreen(
+//            state = ActivitiesUiState()
+//        )
+//    }
+//}

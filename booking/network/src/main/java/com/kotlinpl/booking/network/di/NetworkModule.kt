@@ -19,21 +19,17 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-//    @Provides
-//    @Singleton
-//    fun providesGson() : Gson = GsonBuilder()
-//        .registerTypeAdapter(Result::class.java, ResultTypeAdapter(Any::class.java, DataError::class.java))
-//        .create()
-
     @Provides
     @Singleton
-    fun providesRetrofit(okHttpClient: OkHttpClient, /*gson: Gson*/): Retrofit {
+    fun providesRetrofit(okHttpClient: OkHttpClient): Retrofit {
+        val json = Json {
+            ignoreUnknownKeys = true
+            isLenient = true
+        }
+
         return Retrofit.Builder()
-//            .client(okHttpClient)
-            .addConverterFactory(Json{
-                ignoreUnknownKeys = true
-                isLenient = true
-            }.asConverterFactory(contentType = "application/json".toMediaType()))
+            .client(okHttpClient)
+            .addConverterFactory(json.asConverterFactory(contentType = "application/json".toMediaType()))
             .baseUrl("https://test.api.amadeus.com/v1/")
             .build()
     }

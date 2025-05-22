@@ -28,10 +28,8 @@ class MainViewModel @Inject constructor(
 
     var authSessionInfo by mutableStateOf(AuthSessionInfo(
         accessToken = "",
-        refreshToken = "",
         clientId = BuildConfig.OTT_CLIENT_ID,
         expiresIn = 0L,
-        tokenType = "",
         clientSecret = BuildConfig.OTT_CLIENT_SECRET
     ))
 

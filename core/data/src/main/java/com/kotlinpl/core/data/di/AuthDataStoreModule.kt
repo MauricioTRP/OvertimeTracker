@@ -10,6 +10,9 @@ import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.preferencesDataStoreFile
 import com.kotlinpl.core.data.Dispatcher
 import com.kotlinpl.core.data.OttDispatchers
+import com.kotlinpl.core.data.networking.AuthenticatorReqInterceptor
+import com.kotlinpl.core.data.networking.AuthorizationReqInterceptor
+import com.kotlinpl.core.domain.session.SessionStorage
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -46,7 +49,22 @@ object AuthDataStoreModule {
             ),
             scope = CoroutineScope(ioDispatcher + SupervisorJob()),
             produceFile = { context.preferencesDataStoreFile(AUTH_DATASTORE_NAME) },
-
         )
+    }
+
+    @Provides
+    @Singleton
+    fun provideAmadeusAuthorizationInterceptor(
+        sessionStorage: SessionStorage
+    ) : AuthorizationReqInterceptor {
+        return AuthorizationReqInterceptor(sessionStorage)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAmadeusAuthenticationInterceptor(
+        sessionStorage: SessionStorage
+    ) : AuthenticatorReqInterceptor {
+        return AuthenticatorReqInterceptor(sessionStorage)
     }
 }

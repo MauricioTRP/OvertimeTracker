@@ -24,54 +24,65 @@ class ActivitiesRepositoryImpl @Inject constructor (
     private val activitiesApiService: ActivitiesApiService,
     @Dispatcher(OttDispatchers.IO) private val dispatcher: CoroutineDispatcher
 ) : ActivityRepository {
-    override suspend fun bookActivity(activity: Activity): Result<Unit, DataError> {
-        TODO("Not yet implemented")
-    }
+//    override suspend fun bookActivity(activity: Activity): Result<Unit, DataError> {
+//        TODO("Not yet implemented")
+//    }
 
     override suspend fun getActivities(
         latitude: Double,
         longitude: Double,
         radius: Int
     ): Result<List<Activity>, DataError> {
-        return withContext(dispatcher) {
+        val responseActivities =
+            activitiesApiService.getActivities(latitude, longitude, radius)
+        val responseToResult =
+            responseToResult(responseActivities)
 
+        return when (responseToResult) {
+            is Result.Success -> {
+                val activities = responseToResult.data?.data?.map { it.toActivity() } ?: emptyList()
+                Log.d("ActivitiesRepositoryImpl", "Activities: $activities")
+                Result.Success(activities)
+            }
+
+            is Result.Error<*> -> responseToResult
         }
+
     }
 
-    override suspend fun getActivityById(id: String): Result<Activity?, DataError> {
-        TODO("Not yet implemented")
+//    override suspend fun getActivityById(id: String): Result<Activity?, DataError> {
+//        TODO("Not yet implemented")
+//    }
+//
+//    override suspend fun getActivitiesByUserId(userId: String): Result<List<Activity>, DataError> {
+//        TODO("Not yet implemented")
+//    }
+
+    private fun ActivityDto.toActivity(): Activity {
+        return Activity(
+            type = this.type,
+            id = this.id,
+            name = this.name,
+            description = this.description.toString(),
+            geoCode = this.geoCodeDto?.toGeocode(),
+            price = this.price?.toPrice(),
+            pictures = this.pictures,
+            bookingLink = this.bookingLink.toString(),
+            minimumDuration = this.minimumDuration.toString()
+        )
     }
 
-    override suspend fun getActivitiesByUserId(userId: String): Result<List<Activity>, DataError> {
-        TODO("Not yet implemented")
+    private fun GeoCodeDto.toGeocode(): GeoCode {
+        return GeoCode(
+            latitude = this.latitude,
+            longitude = this.longitude
+        )
     }
 
-}
-
-private fun ActivityDto.toActivity() : Activity {
-    return Activity(
-        type = this.type,
-        id = this.id,
-        name = this.name,
-        description = this.description.toString(),
-        geoCode = this.geoCodeDto?.toGeocode(),
-        price = this.price?.toPrice(),
-        pictures = this.pictures,
-        bookingLink = this.bookingLink.toString(),
-        minimumDuration = this.minimumDuration.toString()
-    )
-}
-
-private fun GeoCodeDto.toGeocode() : GeoCode {
-    return GeoCode(
-        latitude = this.latitude,
-        longitude = this.longitude
-    )
-}
-
-private fun PriceDto.toPrice() : Price {
-    return Price(
-        amount = this.amount,
-        currencyCode = this.currencyCode.toString()
-    )
+    private fun PriceDto.toPrice(): Price {
+        return Price(
+            amount = this.amount,
+            currencyCode = this.currencyCode.toString()
+        )
+    }
 }

@@ -5,11 +5,13 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.Response
+import java.io.IOException
 import javax.inject.Inject
 
-class AuthInterceptor @Inject constructor(
+class AuthorizationReqInterceptor @Inject constructor(
     private val sessionStorage: SessionStorage
 ) : Interceptor {
+    @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         val token = runBlocking{ sessionStorage.getToken().first() }
         val request = chain.request().newBuilder()

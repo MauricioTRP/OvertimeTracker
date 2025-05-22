@@ -32,10 +32,8 @@ object AuthInfoSerializer : Serializer<AuthSessionInfo> {
 
     override val defaultValue: AuthSessionInfo = AuthSessionInfo(
         accessToken = "",
-        refreshToken = "",
         clientId = "",
+        clientSecret = "",
         expiresIn = 0L,
-        tokenType = "Bearer",
-        clientSecret = ""
     )
 }
