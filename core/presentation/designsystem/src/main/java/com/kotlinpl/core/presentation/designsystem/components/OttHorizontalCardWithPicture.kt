@@ -11,12 +11,15 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
@@ -30,7 +33,7 @@ import androidx.compose.ui.unit.dp
 import com.kotlinpl.core.presentation.designsystem.R
 
 @Composable
-fun OttCard(
+fun OttHorizontalCardWithPicture(
     isLoading: Boolean,
     modifier: Modifier = Modifier,
     title: String? = null,
@@ -56,18 +59,30 @@ fun OttCard(
     ) {
         Row(
             modifier = Modifier
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .heightIn(max = 125.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Image(
-                painter = painter,
-                contentDescription = descriptionText,
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .heightIn(min = 100.dp, max = 150.dp)
-                    .aspectRatio(1f),
-                contentScale = ContentScale.Crop
-            )
+            if (isLoading) {
+                CircularProgressIndicator(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .heightIn(min = 50.dp, max = 150.dp)
+                        .aspectRatio(1f)
+                )
+            } else {
+
+                Image(
+                    painter = painter,
+                    contentDescription = descriptionText,
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .clip(RoundedCornerShape(dimensionResource(R.dimen.small_padding)))
+                        .aspectRatio(1f)
+                            ,
+                    contentScale = ContentScale.Crop
+                )
+            }
 
             Column(
                 modifier = Modifier
@@ -76,7 +91,7 @@ fun OttCard(
             ) {
                 // Title
                 Text(
-                    text = title,
+                    text = if (isLoading) "" else title,
                     modifier = Modifier
                         .fillMaxWidth(),
                     style = MaterialTheme.typography.titleMedium
@@ -101,7 +116,7 @@ fun OttCard(
 @Preview(name = "OttCardPreview: No Image, loaded info")
 @Composable
 fun OttCardPreviewNoPicture() {
-    OttCard(
+    OttHorizontalCardWithPicture(
         title = "Card Title",
         descriptionText = "Card description text that shows some information about the element you want to display",
         isLoading = false,
@@ -113,7 +128,7 @@ fun OttCardPreviewNoPicture() {
 @Composable
 fun OttCardPreviewWithPicture() {
     val pictureVector = painterResource(id = R.drawable.random_image)
-    OttCard(
+    OttHorizontalCardWithPicture(
         title = "Card Title",
         descriptionText = "Card description text that shows some information about the element you want to display",
         isLoading = false,
@@ -126,7 +141,7 @@ fun OttCardPreviewWithPicture() {
 @Composable
 fun OttCardPreviewLoading() {
     val pictureVector = painterResource(id = R.drawable.random_image)
-    OttCard(
+    OttHorizontalCardWithPicture(
         title = "",
         descriptionText = "",
         isLoading = true,

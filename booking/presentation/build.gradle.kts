@@ -12,4 +12,7 @@ dependencies {
     implementation(projects.core.domain)
 
     implementation(projects.booking.domain)
+
+    // Coil
+    implementation(libs.bundles.coil)
 }

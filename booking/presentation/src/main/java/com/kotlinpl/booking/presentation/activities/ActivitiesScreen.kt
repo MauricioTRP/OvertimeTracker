@@ -1,42 +1,37 @@
 package com.kotlinpl.booking.presentation.activities
 
-import android.widget.Spinner
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import coil3.compose.rememberAsyncImagePainter
 import com.kotlinpl.core.domain.booking.Activity
-import com.kotlinpl.core.domain.booking.GeoCode
-import com.kotlinpl.core.domain.booking.Price
 import com.kotlinpl.core.presentation.designsystem.OTT_MultimoduleTheme
+import com.kotlinpl.core.presentation.designsystem.R
 import com.kotlinpl.core.presentation.designsystem.components.GradientBackground
 import com.kotlinpl.core.presentation.designsystem.components.OttActionButton
+import com.kotlinpl.core.presentation.designsystem.components.OttHorizontalCardWithPicture
 
 @Composable
 fun ActivitiesScreenRoot(
     viewModel: ActivitiesViewModel = hiltViewModel(),
-    onClick: (ActivitiesScreenActions) -> Unit = {}
+    onClick: (ActivitiesScreenActions) -> Unit = {},
 ) {
     ActivitiesScreen(
         viewModel.activitiesUiState,
         onClick = { action ->
             when (action) {
                 ActivitiesScreenActions.OnGetActivitiesClick -> viewModel.getActivities()
+                ActivitiesScreenActions.OnActivityClick -> {  }
             }
         }
     )
@@ -86,62 +81,59 @@ fun ActivitiesScreen(
 }
 
 @Composable
-fun ActivitiesList(activities: List<Activity>) {
+fun ActivitiesList(activities: List<Activity>, onClick: () -> Unit = {}) {
     LazyColumn{
         items(activities) { activity ->
-            ActivityItem(activity = activity)
+            ActivityItem(
+                activity = activity,
+                onClick = onClick
+            )
         }
     }
 }
 
 @Composable
-fun ActivityItem(activity: Activity) {
-    Card(modifier = Modifier.padding(8.dp)) {
-        Row(
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            val picture = if (activity.pictures.isEmpty()) "No picture" else activity.pictures[0]
-            Text(
-                modifier = Modifier
-                    .padding(8.dp)
-                    .size(100.dp),
-                text = picture
-            )
+fun ActivityItem(activity: Activity, onClick: () -> Unit = {}) {
+    val activityPicture = activity.pictures.firstOrNull() ?: ""
 
-            Spacer(modifier = Modifier.padding(horizontal = 8.dp))
+    val painter = rememberAsyncImagePainter(
+        model = activityPicture,
+        error = painterResource(R.drawable.random_image)
+    )
 
-            Column {
-                Text(text = activity.name.trim())
-                Text(text = "${activity.price?.amount.toString().trim() ?: " "} ${activity.price?.currencyCode?.trim() ?: "No Price Data"}")
-            }
-        }
-    }
+    OttHorizontalCardWithPicture(
+        isLoading = false,
+        title = activity.name,
+        descriptionText = activity.description,
+        cardDescription = activity.description,
+        imageVector = painter,
+        enabled = true,
+        onCardClick = onClick
+    )
 }
 
 @Preview(showBackground = true)
 @Composable
 fun ActivityItemPreview() {
     OTT_MultimoduleTheme {
-        ActivityItem(activity = Activity(
-            type = "vacations",
-            id = "1",
-            name = "Activity 1",
-            description = "Description 1",
-            geoCode = GeoCode(latitude = 41.397158, longitude = 2.160873),
-            price = Price(amount = 100.0, currencyCode = "USD"),
-            pictures = emptyList(),
-            bookingLink = "BookingLink",
-            minimumDuration = "3 years"
-        ))
+        OttHorizontalCardWithPicture(
+            isLoading = false,
+            title = "Activity 1",
+            descriptionText = "Description 1",
+            cardDescription = "Activity 1",
+            imageVector = painterResource(R.drawable.random_image),
+            enabled = true,
+            onCardClick = {}
+        )
     }
 }
 
-//@Preview
-//@Composable
-//fun ActivitiesScreenPreview() {
-//    OTT_MultimoduleTheme {
-//        ActivitiesScreen(
-//            state = ActivitiesUiState()
-//        )
-//    }
-//}
+@Preview
+@Composable
+fun ActivitiesScreenPreview() {
+    OTT_MultimoduleTheme {
+        ActivitiesScreen(
+            state = ActivitiesUiState()
+        )
+    }
+}
