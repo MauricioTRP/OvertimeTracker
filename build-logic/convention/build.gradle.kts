@@ -63,5 +63,10 @@ gradlePlugin {
 
             implementationClass = "JvmRetrofitConventionPlugin"
         }
+        register("room") {
+            id = libs.plugins.ott.room.get().pluginId
+
+            implementationClass = "RoomConventionPlugin"
+        }
     }
 }
