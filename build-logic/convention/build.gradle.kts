@@ -1,15 +1,15 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
 
 plugins {
     `kotlin-dsl`
 }
 java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 kotlin {
     compilerOptions {
-        jvmTarget = JVM_11
+        jvmTarget = JVM_17
     }
 }
 
@@ -19,6 +19,7 @@ dependencies {
     compileOnly(libs.compose.gradlePlugin)
     compileOnly(libs.kotlin.gradlePlugin)
     compileOnly(libs.ksp.gradlePlugin)
+    compileOnly(libs.room.gradlePlugin)
 }
 
 gradlePlugin {
@@ -62,6 +63,11 @@ gradlePlugin {
             id = libs.plugins.ott.jvm.retrofit.get().pluginId
 
             implementationClass = "JvmRetrofitConventionPlugin"
+        }
+        register("room") {
+            id = libs.plugins.ott.room.get().pluginId
+
+            implementationClass = "RoomConventionPlugin"
         }
     }
 }
