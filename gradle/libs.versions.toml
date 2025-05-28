@@ -19,6 +19,7 @@ kotlinxSerialization = "1.8.1"
 datastorePreferences = "1.1.1"
 androidxSecurityCrypto = "1.0.0"
 coilCompose = "3.2.0"
+jacoco = "0.8.12"
 
 # Network
 okHttp3 = "4.12.0"

@@ -1,8 +1,8 @@
 package com.kotlinpl.ott_multimodule
 
-import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -65,6 +65,7 @@ private fun NavGraphBuilder.authGraph(navController: NavHostController) {
                 onSuccessfulRegistration = {
                     navController.navigate(BookingScreens.Root.route)
                 },
+                viewModel = hiltViewModel()
             )
         }
 

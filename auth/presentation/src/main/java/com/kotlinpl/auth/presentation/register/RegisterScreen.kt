@@ -34,7 +34,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.kotlinpl.core.presentation.designsystem.OTT_MultimoduleTheme
 import com.kotlinpl.core.presentation.designsystem.components.GradientBackground
 import com.kotlinpl.auth.presentation.R
@@ -49,7 +48,7 @@ import com.kotlinpl.core.presentation.ui.ObserveAsEvents
 fun RegisterScreenRoot(
     onSignInClick: () -> Unit,
     onSuccessfulRegistration: () -> Unit,
-    viewModel: RegisterViewModel = hiltViewModel()
+    viewModel: RegisterViewModel
 ) {
     val context = LocalContext.current
     val keyboardController = LocalSoftwareKeyboardController.current
