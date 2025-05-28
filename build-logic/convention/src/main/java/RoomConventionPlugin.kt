@@ -1,5 +1,4 @@
 import androidx.room.gradle.RoomExtension
-import com.android.utils.TraceUtils.simpleId
 import com.google.devtools.ksp.gradle.KspExtension
 import com.kotlinpl.convention.libs
 import org.gradle.api.Plugin
