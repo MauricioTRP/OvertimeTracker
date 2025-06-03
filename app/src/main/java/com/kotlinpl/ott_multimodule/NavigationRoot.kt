@@ -13,6 +13,7 @@ import com.kotlinpl.auth.presentation.login.LoginScreenRoot
 import com.kotlinpl.auth.presentation.register.RegisterScreenRoot
 import com.kotlinpl.booking.presentation.BookingScreenRoot
 import com.kotlinpl.booking.presentation.activities.ActivitiesScreenRoot
+import com.kotlinpl.booking.presentation.single_activity.SingleActivityScreenRoot
 
 @Composable
 fun NavigationRoot(
@@ -104,7 +105,36 @@ private fun NavGraphBuilder.bookingGraph(navController: NavHostController) {
         }
 
         composable(BookingScreens.Activities.route) {
-            ActivitiesScreenRoot()
+            ActivitiesScreenRoot(
+                viewModel = hiltViewModel(),
+                onNavigateToActivity = { activity ->
+                    val activityId = activity.id
+                    val singleActivityRoute = BookingScreens.SingleActivity(activityId)
+
+                    navController.navigate(
+                        route = "${singleActivityRoute.route}/${singleActivityRoute.id}"
+                    ) {
+                        popUpTo(route = BookingScreens.Activities.route) {
+                            inclusive = false
+                            saveState = true
+                        }
+
+                        restoreState = true
+                    }
+                }
+            )
+        }
+
+        /**
+         * Single Activity Screen
+         */
+        composable(route = "${BookingScreens.SingleActivity().route}/{singleActivity}") {
+            val activityId = it.arguments?.getString("singleActivity")
+
+            SingleActivityScreenRoot(
+                activityId = activityId.toString(),
+                viewModel = hiltViewModel()
+            )
         }
     }
 }

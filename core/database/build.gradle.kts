@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.ott.android.library)
+    alias(libs.plugins.ott.room)
 }
 
 android {
@@ -7,10 +8,5 @@ android {
 }
 
 dependencies {
-
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    implementation(projects.core.domain)
 }

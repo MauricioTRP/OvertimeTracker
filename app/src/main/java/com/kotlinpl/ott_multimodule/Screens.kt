@@ -48,4 +48,8 @@ sealed interface BookingScreens {
     data object Activities : BookingScreens, Screens {
         override val route = "activities"
     }
+
+    data class SingleActivity(val id: String? = null) : BookingScreens, Screens {
+        override val route = "single_activity"
+    }
 }

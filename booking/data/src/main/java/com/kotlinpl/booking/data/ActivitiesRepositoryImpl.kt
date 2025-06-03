@@ -50,9 +50,19 @@ class ActivitiesRepositoryImpl @Inject constructor (
 
     }
 
-//    override suspend fun getActivityById(id: String): Result<Activity?, DataError> {
-//        TODO("Not yet implemented")
-//    }
+    override suspend fun getActivityById(id: String): Result<Activity?, DataError> {
+        val responseActivity = activitiesApiService.getActivityById(id)
+
+        val responseToResult = responseToResult(responseActivity)
+
+        return when(responseToResult) {
+            is Result.Success -> {
+                val activity = responseToResult.data?.toActivity()
+                Result.Success(activity)
+            }
+            is Result.Error<*> -> responseToResult
+        }
+    }
 //
 //    override suspend fun getActivitiesByUserId(userId: String): Result<List<Activity>, DataError> {
 //        TODO("Not yet implemented")
@@ -60,9 +70,9 @@ class ActivitiesRepositoryImpl @Inject constructor (
 
     private fun ActivityDto.toActivity(): Activity {
         return Activity(
-            type = this.type,
-            id = this.id,
-            name = this.name,
+            type = this.type.toString(),
+            id = this.id.toString(),
+            name = this.name.toString(),
             description = this.description.toString(),
             geoCode = this.geoCodeDto?.toGeocode(),
             price = this.price?.toPrice(),
