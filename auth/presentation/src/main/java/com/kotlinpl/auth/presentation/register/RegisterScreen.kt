@@ -46,7 +46,7 @@ import com.kotlinpl.core.presentation.ui.ObserveAsEvents
 
 @Composable
 fun RegisterScreenRoot(
-    onSignInClick: () -> Unit,
+    onLoginClick: () -> Unit,
     onSuccessfulRegistration: () -> Unit,
     viewModel: RegisterViewModel
 ) {
@@ -77,7 +77,15 @@ fun RegisterScreenRoot(
 
     RegisterScreen(
         state = viewModel.state,
-        onAction = { viewModel.onAction(RegisterAction.OnRegisterClick) },
+        onAction = { action ->
+            when(action) {
+                RegisterAction.OnLoginClick -> {
+                    onLoginClick()
+                }
+                RegisterAction.OnRegisterClick -> viewModel.onAction(action)
+                RegisterAction.OnTogglePasswordVisibilityClick -> viewModel.onAction(action)
+            }
+       },
         onSuccessfulRegistration = onSuccessfulRegistration
     )
 }

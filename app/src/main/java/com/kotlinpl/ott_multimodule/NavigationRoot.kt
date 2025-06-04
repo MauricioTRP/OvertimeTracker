@@ -10,6 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.kotlinpl.auth.presentation.intro.IntroScreenRoot
 import com.kotlinpl.auth.presentation.login.LoginScreenRoot
+import com.kotlinpl.auth.presentation.login.LoginViewModel
 import com.kotlinpl.auth.presentation.register.RegisterScreenRoot
 import com.kotlinpl.booking.presentation.BookingScreenRoot
 import com.kotlinpl.booking.presentation.activities.ActivitiesScreenRoot
@@ -54,7 +55,7 @@ private fun NavGraphBuilder.authGraph(navController: NavHostController) {
 
         composable(route = AuthScreens.Register.route) {
             RegisterScreenRoot(
-                onSignInClick = {
+                onLoginClick = {
                     navController.navigate(AuthScreens.Login.route) {
                         popUpTo(route = AuthScreens.Register.route) {
                             inclusive = true
