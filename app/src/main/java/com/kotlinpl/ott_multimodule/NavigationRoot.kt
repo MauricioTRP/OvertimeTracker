@@ -76,7 +76,7 @@ private fun NavGraphBuilder.authGraph(navController: NavHostController) {
                 onSuccessfulLogin = {
                     navController.navigate(BookingScreens.Root.route)
                 },
-                onSignUpClick = {
+                onRegisterClick = {
                     navController.navigate(AuthScreens.Register.route) {
                         popUpTo(route = AuthScreens.Login.route) {
                             inclusive = true
@@ -85,7 +85,8 @@ private fun NavGraphBuilder.authGraph(navController: NavHostController) {
 
                         restoreState = true
                     }
-                }
+                },
+                viewModel = hiltViewModel<LoginViewModel>()
             )
         }
     }

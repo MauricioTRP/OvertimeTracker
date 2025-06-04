@@ -26,7 +26,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.kotlinpl.auth.presentation.R
 import com.kotlinpl.core.presentation.designsystem.OTT_MultimoduleTheme
 import com.kotlinpl.core.presentation.designsystem.components.GradientBackground
@@ -37,9 +36,9 @@ import com.kotlinpl.core.presentation.ui.ObserveAsEvents
 
 @Composable
 fun LoginScreenRoot(
-    onSignUpClick: () -> Unit,
+    onRegisterClick: () -> Unit,
     onSuccessfulLogin: () -> Unit,
-    viewModel: LoginViewModel = hiltViewModel()
+    viewModel: LoginViewModel
 ) {
     val context = LocalContext.current
 
@@ -67,8 +66,16 @@ fun LoginScreenRoot(
 
     LoginScreen(
         state = viewModel.state,
-        onAction = { viewModel.onAction(LoginActions.OnLoginClick) },
-        onSuccessfulLogin = onSuccessfulLogin
+        onAction = { action ->
+            when(action) {
+                LoginActions.OnRegisterClick -> {
+                    // Used to navigate
+                    onRegisterClick()
+                }
+                LoginActions.OnLoginClick -> viewModel.onAction(action)
+                LoginActions.OnTogglePasswordVisibility -> viewModel.onAction(action)
+            }
+        },
     )
 }
 
@@ -76,7 +83,6 @@ fun LoginScreenRoot(
 private fun LoginScreen(
     state: LoginState,
     onAction: (LoginActions) -> Unit,
-    onSuccessfulLogin: () -> Unit // used to navigate to main screen after successful login
 ) {
     GradientBackground {
         Column(
@@ -122,7 +128,7 @@ private fun LoginScreen(
                         end = annotatedString.length
                     )
                         .firstOrNull()?.let {
-                            onAction(LoginActions.OnLoginClick)
+                            onAction(LoginActions.OnRegisterClick)
                         }
                 }
             )
@@ -179,7 +185,6 @@ fun LoginScreenPreview() {
         LoginScreen(
             state = LoginState(),
             onAction = {},
-            onSuccessfulLogin = {}
         )
     }
 }

@@ -48,11 +48,7 @@ class LoginViewModel @Inject constructor (
             LoginActions.OnLoginClick -> {
                 login()
             }
-
-            LoginActions.OnRegisterClick -> {
-
-            }
-
+            LoginActions.OnRegisterClick -> Unit
             LoginActions.OnTogglePasswordVisibility -> {
                 state = state.copy(isPasswordVisible = !state.isPasswordVisible)
             }
